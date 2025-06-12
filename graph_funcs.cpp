@@ -2,7 +2,7 @@
 
 void make_graph_arr (std::vector<std::vector<int>>& adjacency_matrix, int& size) {
     std::cout << "Enter number of nodes: ";
-    get_int(&size, 0, INT_MAX);
+    get_int(size, 0, INT_MAX);
     adjacency_matrix.resize(size, std::vector<int>(size, INF));
     for (int i = 0; i < size; i++) adjacency_matrix[i][i] = 0;
 }
@@ -10,16 +10,14 @@ void make_graph_arr (std::vector<std::vector<int>>& adjacency_matrix, int& size)
 void add_edge_arr_undirect (std::vector<std::vector<int>>& adjacency_matrix, int i, int j) {
     int n;
     std::cout << "длина ребра:\n";
-    get_int(&n, 0, INT_MAX - 1);
-    adjacency_matrix[i][j] = n;
-    adjacency_matrix[j][i] = n;
-}
-
-void add_edge_arr_direct (std::vector<std::vector<int>>& adjacency_matrix, int i, int j) {
-    int n;
-    std::cout << "длина ребра:\n";
-    get_int(&n, 0, INT_MAX - 1);
-    adjacency_matrix[i][j] = n;
+    get_int(n, -1, INT_MAX - 1);
+    if (n == -1) {
+        adjacency_matrix[i][j] = INF;
+        adjacency_matrix[j][i] = INF;
+    } else {
+        adjacency_matrix[i][j] = n;
+        adjacency_matrix[j][i] = n;
+    }
 }
 
 void get_edge_arr (std::vector<std::vector<int>>& adjacency_matrix, int i, int j) {
@@ -28,9 +26,8 @@ void get_edge_arr (std::vector<std::vector<int>>& adjacency_matrix, int i, int j
 }
 
 void delete_edge_arr_undirect (std::vector<std::vector<int>>& adjacency_matrix, int i, int j) {
-    //if (i < adjacency_matrix.size() || j < adjacency_matrix[i].size() || adjacency_matrix.empty()) return;
-    adjacency_matrix[i][j] = 0;
-    adjacency_matrix[j][i] = 0;
+    adjacency_matrix[i][j] = INF;
+    adjacency_matrix[j][i] = INF;
 }
 
 void display_graph_arr (std::vector<std::vector<int>>& adjacency_matrix, int size) {
@@ -59,7 +56,7 @@ void delete_all_edges(std::vector<std::vector<int>>& adjacency_matrix) {
     }
 }
 
-void force_clear_adjacency_matrix(std::vector<std::vector<int>>& adjacency_matrix) {
+void clear_adjacency_matrix(std::vector<std::vector<int>>& adjacency_matrix) {
     adjacency_matrix.clear();
     adjacency_matrix.shrink_to_fit();
 }

@@ -15,7 +15,7 @@ void delete_edge_arr_undirect (std::vector<std::vector<int>>& adjacency_matrix, 
 void delete_all_edges (std::vector<std::vector<int>>& adjacency_matrix);
 void display_graph_arr (std::vector<std::vector<int>>& adjacency_matrix, int size);
 void dijkstra_arr(std::vector<std::vector<int>>& adjacency_matrix, int from);
-void force_clear_adjacency_matrix(std::vector<std::vector<int>>& adjacency_matrix);
+void clear_adjacency_matrix(std::vector<std::vector<int>>& adjacency_matrix);
 
 #endif
 

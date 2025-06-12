@@ -6,7 +6,9 @@
 #include <cstdlib>
 #include <fstream>
 
-int get_int(int *number, int min, int max);
+#include "graph_funcs.h"
+
+int get_int(int &number, int min, int max);
 void visualize_graph(const std::vector<std::vector<int>>& adjacency_matrix);
 void make_random_graph(std::vector<std::vector<int>>& adjacency_matrix);
 

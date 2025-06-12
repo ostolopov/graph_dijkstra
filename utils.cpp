@@ -1,8 +1,8 @@
 #include "utils.h"
 
-int get_int(int *number, int min, int max) {
+int get_int(int &number, int min, int max) {
     while (true) {
-        if (!(std::cin >> *number)) {
+        if (!(std::cin >> number)) {
             if (std::cin.eof()) {
                 std::cout << "\nProgram terminated.\n";
                 return 0;
@@ -12,7 +12,7 @@ int get_int(int *number, int min, int max) {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        if (*number < min || *number > max) {
+        if (number < min || number > max) {
             std::cout << "The number is out of the allowed range. Please try again!\n";
             continue;
         }
@@ -32,9 +32,10 @@ void visualize_graph(const std::vector<std::vector<int>>& adjacency_matrix) {
     dot_file << "  node [shape=circle];\n";
     for (int i = 0; i < adjacency_matrix.size(); ++i) {
         for (int j = i; j < adjacency_matrix[i].size(); ++j) {
-            if (adjacency_matrix[i][j] != 0) {
-                dot_file << "  " << i << " -- " << j << " [label=\"" << adjacency_matrix[i][j] << "\"];\n";
-            }
+            //if (i == j || adjacency_matrix[i][j] == 0 || adjacency_matrix[i][j] == INF)
+            if ( adjacency_matrix[i][j] == 0 || adjacency_matrix[i][j] == INF)
+                continue;
+            dot_file << "  " << i << " -- " << j << " [label=\"" << adjacency_matrix[i][j] << "\"];\n";
         }
     }
     dot_file << "}\n";
@@ -48,7 +49,12 @@ void make_random_graph(std::vector<std::vector<int>>& adjacency_matrix) {
     int size = adjacency_matrix.size();
     for (int i = 0; i < size; i++) {
         for (int j = i + 1; j < size; j++) {
-            int temp = rand() % 20;
+            int temp = rand() % 20 - 1;
+            if (temp == -1) {
+                adjacency_matrix[i][j] = INF;
+                adjacency_matrix[j][i] = INF;
+                continue;
+            }
             adjacency_matrix[i][j] = temp;
             adjacency_matrix[j][i] = temp;
         }

@@ -14,7 +14,7 @@ void dialog_arr () {
                  "(8) PNG файл\n"
                  "(9) Сгенерировать матрицу смежности\n"
                  "(10) Очистить матрицу\n";
-    while (get_int(&case_number, 0, 10) != 0  && case_number != 0) {
+    while (get_int(case_number, 0, 10) != 0  && case_number != 0) {
         switch (case_number) {
             case 1:
                 make_graph_arr(adjacency_matrix, size);
@@ -24,28 +24,28 @@ void dialog_arr () {
             break;
             case 3:
                 std::cout << "Введите i, j:\n";
-            get_int(&i, 1, size);
-            get_int(&j, 1, size);
+            get_int(i, 1, size);
+            get_int(j, 1, size);
             add_edge_arr_undirect(adjacency_matrix, i - 1, j - 1);
             break;
             case 4:
                 std::cout << "Введите i, j:\n";
-            get_int(&i, 1, size);
-            get_int(&j, 1, size);
+            get_int(i, 1, size);
+            get_int(j, 1, size);
             delete_edge_arr_undirect(adjacency_matrix, i - 1, j - 1);
             break;
             case 5:
                 std::cout << "Введите i, j:\n";
-            get_int(&i, 1, size);
-            get_int(&j, 1, size);
+            get_int(i, 1, size);
+            get_int(j, 1, size);
             get_edge_arr(adjacency_matrix, i - 1 , j - 1);
             break;
             case 6:
                 delete_all_edges(adjacency_matrix);
                 break;
             case 7:
-                std::cout << "Введите i:\n";
-            get_int(&i, 0, size - 1);
+                std::cout << "Введите i (1 - size):\n";
+            get_int(i, 1, size);
             dijkstra_arr (adjacency_matrix, i);
             break;
             case 8:
@@ -55,7 +55,7 @@ void dialog_arr () {
                 make_random_graph(adjacency_matrix);
                 break;
             case 10:
-                force_clear_adjacency_matrix(adjacency_matrix);
+                clear_adjacency_matrix(adjacency_matrix);
                 break;
             break;
             default:
@@ -73,5 +73,5 @@ void dialog_arr () {
                  "(9) Сгенерировать матрицу смежности\n"
                  "(10) Очистить матрицу\n";
     }
-    force_clear_adjacency_matrix(adjacency_matrix);
+    clear_adjacency_matrix(adjacency_matrix);
 }
